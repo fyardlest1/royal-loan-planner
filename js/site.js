@@ -158,7 +158,7 @@ function displayTable(results) {
 	// getting the div id "tblResult"
 	let tableData = document.getElementById('tblResult')
 
-	for (let i = 0; i < results.length; i++) {
+	for (let i = 0; i < results.length - 1; i++) {
 		let newItem = results[i]
 
 		// get a new copy of the template's contents
