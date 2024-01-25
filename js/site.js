@@ -24,8 +24,8 @@ function getValues() {
 	// let payment = monthlyPayment(results)
 	// let rate = interestPayment(results)
 	displayCard(totalPayment)
-	totalMonthlyPayment(results, totalPayment)
-	displayTable(results, totalPayment)
+	let allPayment = totalMonthlyPayment(results, totalPayment)
+	displayTable(allPayment)
 }
 
 // total payment 
@@ -146,21 +146,17 @@ function displayCard(totalPayment) {
 }
 
 
-function displayTable(results, totalPayment) {
+function displayTable(results) {
 	// get a copy of the template
 	let template
-
-	// access the totalMonthlyPayment(results, totalPayment)
-	let resultsArray = totalMonthlyPayment(results, totalPayment)
-
 	// Iterate through the resultsArray
 	template = document.getElementById('table-template')
 
 	// getting the div id "tblResult"
 	let tableData = document.getElementById('tblResult')
 	
-	for (let i = 0; i < resultsArray.length; i++) {
-		let newItem = resultsArray[i]
+	for (let i = 0; i < results.length; i++) {
+		let newItem = results[i]
 
 		// get a new copy of the template's contents
 		let templateCopy = template.content.cloneNode(true)
