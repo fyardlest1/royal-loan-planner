@@ -1,131 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>App Name: A coding Challenge</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>RoyalLoanPlanner: A coding Challenge</title>
 
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<!-- Bootstrap CSS -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+			crossorigin="anonymous"
+		/>
 
-        <!-- Bootstrap Icons -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+		<!-- Bootstrap Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+		/>
 
-        <!-- Devicons -->
-        
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">          
+		<!-- Devicons -->
 
-        <!-- CSS Themes -->
-        <link rel="stylesheet" href="/css/themes.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+		/>
 
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/site.css" />
+		<!-- CSS Themes -->
+		<link rel="stylesheet" href="/css/themes.css" />
 
-        <!-- Favicon -->
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="/css/site.css" />
+
+		<!-- Favicon -->
 		<link
 			rel="shortcut icon"
 			href="/img/favicon_io/favicon.ico"
 			type="image/x-icon"
 		/>
-    </head>
-    <body data-fyard-theme='green'>
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="container">
-                    <a class="navbar-brand" href="/index.html">
-                        <img src="/img/logos/logo-bulb1.png" height='40' alt="">
-                        App Name
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/app.html">The App</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/code.html">The Code</a>
-                            </li>
-                            <li class="nav-item">
-                                <!-- CHANGE ME!!!!!!!! -->
-                                <a class="nav-link" href="#">The Repo</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://fyardlest.net" target='_blank' referrerpolicy='no-referrer'>Portfolio</a>
-                            </li>
-                            <li class="nav-item">
-                                <!-- CHANGE ME!!!!!!!! -->
-                                <a class="nav-link" href="#">The Blog</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+	</head>
+	<body data-fyard-theme="purple">
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark">
+				<div class="container">
+					<a class="navbar-brand" href="/index.html">
+						<img
+							src="/img/logos/logo-bulb1.png"
+							height="40"
+							alt="Site Logo"
+						/>
+						RoyalLoanPlanner
+					</a>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div
+						class="collapse navbar-collapse"
+						id="navbarSupportedContent"
+					>
+						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+							<li class="nav-item">
+								<a
+									class="nav-link"
+									aria-current="page"
+									href="/index.html"
+									>Home</a
+								>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" href="/app.html"
+									>The App</a
+								>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/code.html"
+									>The Code</a
+								>
+							</li>
+							<li class="nav-item">
+								<!-- CHANGE ME!!!!!!!! -->
+								<a
+									class="nav-link"
+									href="https://github.com/fyardlest1/royal-loan-planner"
+									target="_blank"
+									>The Repo</a
+								>
+							</li>
+							<li class="nav-item">
+								<a
+									class="nav-link"
+									href="https://fyardlest.net"
+									target="_blank"
+									referrerpolicy="no-referrer"
+									>Portfolio</a
+								>
+							</li>
+							<li class="nav-item">
+								<!-- CHANGE ME!!!!!!!! -->
+								<a class="nav-link" href="#">The Blog</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
 
-        <main class='container py-3'>
-            <h1>App UI goes here!</h1>
-            <input type="text" name="message" id="message" placeholder='Enter a Message'>
-            <button id="btnSubmit" class="btn btn-primary">Display Message</button>
-        </main>
+		<main class="container py-3">
+			<div class="">
+				<h2 class="border-bottom border-2 mt-md-3">Instruction</h2>
+				<p>Enter.... value</p>
+			</div>
+			<div class="row row-cols-1 row-cols-md-2">
+				<div class="col-md-4 mt-2">
+					<div class="card">
+						<div class="card-body container-fluid">
+							<h3 class="border-bottom pb-2 mb-3">
+								Royal Loan Planner
+							</h3>
+							<form class="row row-cols-1 row-cols-sm-2 g-2">
+								<div class="col-auto">
+									<label for="loan" class="form-label"
+										>Loan Amount</label
+									>
+								</div>
+								<div class="col">
+									<input
+										type="number"
+										class="form-control"
+										id="loan"
+										placeholder="Amount here"
+										value="25000"
+									/>
+								</div>
+								<div class="col-auto">
+									<label for="term" class="form-label"
+										>Term (Months)</label
+									>
+								</div>
+								<div class="col">
+									<input
+										type="number"
+										class="form-control"
+										id="term"
+										placeholder="Your term here"
+										value="60"
+									/>
+								</div>
+								<div class="col-auto">
+									<label
+										for="interestRates"
+										class="form-label"
+										>Interest Rate</label
+									>
+								</div>
+								<div class="col">
+									<input
+										type="number"
+										class="form-control"
+										id="interestRates"
+										placeholder="Interest here"
+										value="5"
+									/>
+								</div>
+								<div class="w-100 text-end">
+									<button
+										id="btnSubmit"
+										type="button"
+										class="btn btn-primary"
+									>
+										Calculate
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 mt-2" id="paymentResults">
+					<!-- First result card goes here -->
+					
+				</div>
+			</div>
+			<!-- Form result -->
+			<h2 class="my-4 border-bottom border-2 pb-2">Results</h2>
+			<div id="tblResult">
+				<!-- Display result here -->
+			</div>
+		</main>
 
-        <footer class="py-3 container-fluid">
-            <div class="container">
-                <div class="row row-cols-1 row-cols-lg-3 align-items-center gy-2" >
-                    <div class="col text-center text-md-start order-last order-lg-first text-lg-start">
-                        &copy;2024 Yardley Estiverne
-                    </div>
-                    <div class="col text-center">
-                        <img src="/img/logos/logo-light-text-block.png" height='50' alt="">
-                    </div>
-                    <div class="col text-center text-lg-end">
-                            <a
-                                href="https://www.linkedin.com/in/fyardlest/"
-                                target="_blank"
-                                class="text-decoration-none"
-                            >
-                                <i class="bi bi-linkedin p-2"></i>
-                            </a>
-                            <a
-                                href="https://github.com/fyardlest1"
-                                target="_blank"
-                                class="text-decoration-none"
-                            >
-                                <i class="bi bi-github p-2"></i>
-                            </a>
-                            <a href="mailto:y.estiverne@yahoo.fr" class="text-decoration-none">
-                                <i class="bi bi-envelope-at p-2"></i>
-                            </a>
-                            <a
-                                href="https://twitter.com/fyardlest"
-                                target="_blank"
-                                class="text-decoration-none"
-                            >
-                                <i class="bi bi-twitter p-2"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none">
-                                <i class="bi bi-youtube p-2"></i>
-                            </a>
-                        </div>
-                </div>
-            </div>
+		<footer class="py-3 container-fluid">
+			<div class="container">
+				<div
+					class="row row-cols-1 row-cols-lg-3 align-items-center gy-2"
+				>
+					<div
+						class="col text-center text-md-start order-last order-lg-first text-lg-start"
+					>
+						&copy;2024 Yardley Estiverne
+					</div>
+					<div class="col text-center">
+						<img
+							src="/img/logos/logo-light-text-block.png"
+							height="50"
+							alt=""
+						/>
+					</div>
+					<div class="col text-center text-lg-end">
+						<a
+							href="https://www.linkedin.com/in/fyardlest/"
+							target="_blank"
+							class="text-decoration-none"
+						>
+							<i class="bi bi-linkedin p-2"></i>
+						</a>
+						<a
+							href="https://github.com/fyardlest1"
+							target="_blank"
+							class="text-decoration-none"
+						>
+							<i class="bi bi-github p-2"></i>
+						</a>
+						<a
+							href="mailto:y.estiverne@yahoo.fr"
+							class="text-decoration-none"
+						>
+							<i class="bi bi-envelope-at p-2"></i>
+						</a>
+						<a
+							href="https://twitter.com/fyardlest"
+							target="_blank"
+							class="text-decoration-none"
+						>
+							<i class="bi bi-twitter p-2"></i>
+						</a>
+						<a href="#" class="text-decoration-none">
+							<i class="bi bi-youtube p-2"></i>
+						</a>
+					</div>
+				</div>
+			</div>
 		</footer>
 
-        <!-- Bootstrap Script -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        
-        <!-- Sweet Alert -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<!-- Monthly Payments TEMPLATE -->
+		<template id="card-template">
+			<div class="card container">
+				<div class="card-body">
+					<h2 class="card-title text-center">
+						Your Monthly Payments
+					</h2>
+					<h3 class="card-subtitle mb-2 text-center pt-4 monthly-payment">
+						Monthly Payments
+					</h3>
+					<div class="card-text pt-4">
+						<div class="row row-cols-2">
+							<div class="col">
+								Total Principal 
+							</div>
+							<div class="col text-end principal">
+								$25,000.00 
+							</div>
+							<div class="col">
+								Total Interest 
+							</div>
+							<div class="col text-end interest">
+								$3,306.85 
+							</div>
+							<div class="col">
+								Total Cost 
+							</div>
+							<div class="col text-end cost">
+								$28,306,00 
+							</div>
+						</div>						 
+					</div>
+				</div>
+			</div>
+		</template>
+		<!-- Table TEMPLATE -->
+		<template id="table-template">
+			<table class="table-responsive container table-striped table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">Month</th>
+						<th scope="col">Payment</th>
+						<th scope="col">Principal</th>
+						<th scope="col">Interest</th>
+						<th scope="col">Total Interest</th>
+						<th scope="col">Balance</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="data">
+						<td class="month"></td>
+						<td class="payment"></td>
+						<td class="principal"></td>
+						<td class="interest"></td>
+						<td class="totalInterest"></td>
+						<td class="balance"></td>
+					</tr>
+				</tbody>
+				<!-- <div class="row g-0 row-cols-5" id="tblResult"></div> -->
+			</table>
 
-        <!-- Custom JS -->
-        <script src="/js/site.js"></script>
-        <script>
-            let button = document.getElementById('btnSubmit');
-            button.addEventListener('click', displayMessage);
-        </script>
-    </body>
+		</template>
+
+		<!-- Bootstrap Script -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- Sweet Alert -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<!-- Custom JS -->
+		<script src="/js/site.js"></script>
+		<script>
+			let button = document.getElementById('btnSubmit')
+			button.addEventListener('click', getValues)
+		</script>
+	</body>
 </html>
