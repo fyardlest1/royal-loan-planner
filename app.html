@@ -189,10 +189,22 @@
 				</div>
 			</div>
 			<!-- Form result -->
-			<h2 class="my-4 border-bottom border-2 pb-2">Results</h2>
-			<div id="tblResult">
-				<!-- Display result here -->
-			</div>
+			<h2 class="my-4 border-bottom border-2 pb-2">Results</h2>				
+				<table class="table-responsive container table-striped table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">Month</th>
+							<th scope="col">Payment</th>
+							<th scope="col">Principal</th>
+							<th scope="col">Interest</th>
+							<th scope="col">Total Interest</th>
+							<th scope="col">Balance</th>
+						</tr>
+					</thead>
+					<tbody id="tblResult"'>
+						<!-- Display result here -->
+					</tbody>
+			</table>
 		</main>
 
 		<footer class="py-3 container-fluid">
@@ -285,30 +297,14 @@
 		</template>
 		<!-- Table TEMPLATE -->
 		<template id="table-template">
-			<table class="table-responsive container table-striped table-bordered">
-				<thead>
-					<tr>
-						<th scope="col">Month</th>
-						<th scope="col">Payment</th>
-						<th scope="col">Principal</th>
-						<th scope="col">Interest</th>
-						<th scope="col">Total Interest</th>
-						<th scope="col">Balance</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id="data">
-						<td class="month"></td>
-						<td class="payment"></td>
-						<td class="principal"></td>
-						<td class="interest"></td>
-						<td class="totalInterest"></td>
-						<td class="balance"></td>
-					</tr>
-				</tbody>
-				<!-- <div class="row g-0 row-cols-5" id="tblResult"></div> -->
-			</table>
-
+			<tr>
+				<td class="month"></td>
+				<td class="payment"></td>
+				<td class="principal"></td>
+				<td class="interest"></td>
+				<td class="totalInterest"></td>
+				<td class="balance"></td>
+			</tr>
 		</template>
 
 		<!-- Bootstrap Script -->

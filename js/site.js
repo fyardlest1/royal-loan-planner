@@ -147,14 +147,16 @@ function displayCard(totalPayment) {
 
 
 function displayTable(results) {
+	// clean up the screen
+	document.getElementById('tblResult').innerHTML = ''
 	// get a copy of the template
 	let template
-	// Iterate through the resultsArray
+	// select the table-template
 	template = document.getElementById('table-template')
 
 	// getting the div id "tblResult"
 	let tableData = document.getElementById('tblResult')
-	
+
 	for (let i = 0; i < results.length; i++) {
 		let newItem = results[i]
 
@@ -168,7 +170,7 @@ function displayTable(results) {
 		templateCopy.querySelector('.totalInterest').textContent =
 			newItem.totalInterest
 		templateCopy.querySelector('.balance').textContent = newItem.balance
-		
+
 		tableData.appendChild(templateCopy)
 	}
 }
