@@ -5,27 +5,31 @@ function getValues() {
 	let interest = document.getElementById('interestRates').value
 
 	// convert the values to integers
-	amount = parseInt(amount)
+	amount = parseFloat(amount)
 	monthlyTerm = parseInt(monthlyTerm)
-	interest = parseInt(interest)
+	interest = parseFloat(interest)
 
-	let results = {
-		loan: amount,
-		term: monthlyTerm,
-		interest: interest,
-	}
-
-	let totalPayment = {
-		payment: monthlyPayment(results),
-		interest: interestPayment(results),
-		principal: principalPayment(results),
-	}
-
-	// let payment = monthlyPayment(results)
-	// let rate = interestPayment(results)
-	let allPayment = totalMonthlyPayment(results, totalPayment)
-	displayTable(allPayment)
-	displayCard(totalPayment)
+	// chek if the numbers are valid numbers
+	if (isNaN(amount) || isNaN(term) || isNaN(interest)) {
+		Swal.fire({
+			icon: 'error',
+			title: 'Oops!',
+			text: '....',
+			backdrop: false,
+		})
+	} else if (fizzNumber > stopNumber || buzzNumber > stopNumber) {
+		// tell the user what to do
+		Swal.fire({
+			icon: 'error',
+			title: 'Almost there!',
+			text: '....',
+			backdrop: false,
+		})
+	} else {
+		let allPayment = totalMonthlyPayment(results, totalPayment)
+		displayTable(allPayment)
+		displayCard(allPayment)
+	}	
 }
 
 // total payment
@@ -43,15 +47,8 @@ function monthlyPayment(results) {
 	let payment =
 		(results.loan * interestRates(results.interest)) /
 		(1 - (1 + interestRates(results.interest)) ** -results.term)
-	return payment
-}
 
-// calculate the interest to pay base on the amount
-// Interest Payment = Previous Remaining Balance * rate/1200
-function interestPayment(results) {
-	let interest = results.loan * interestRates(results.interest)
-	interest = interest
-	return interest
+	return payment
 }
 
 // Principal Payment = Total Monthly Payment - Interest Payment
@@ -106,44 +103,12 @@ function totalMonthlyPayment(results, totalPayment) {
 		resultsArray.push(resultsObject)
 	}
 
-	// adding the totalPrincipal, totalInterest, and totalCost into the array
-	resultsArray.push({
-		totalPrincipal: totalPrincipal,
-		totalInterest: totalInterest,
-		totalCost: totalCost,
-	})
-
 	return resultsArray
 }
 
 // displaying the card information
 function displayCard(totalPayment) {
-	// clean up the screen
-	document.getElementById('paymentResults').innerHTML = ''
-	// get a copy of the template
-	let template
-
-	// access the template
-	template = document.getElementById('card-template')
-	// get a new copy of the template's contents
-	let templateCopy = template.content.cloneNode(true)
-
-	// put the original message into the card
-	templateCopy.querySelector(
-		'.monthly-payment'
-	).textContent = `$${totalPayment.payment}`
-	templateCopy.querySelector(
-		'.principal'
-	).textContent = `$${totalPayment.payment}`
-	templateCopy.querySelector(
-		'.interest'
-	).textContent = `$${totalPayment.interest}`
-	templateCopy.querySelector(
-		'.cost'
-	).textContent = `$${totalPayment.principal}`
-
-	// add the copy of the template tag to the div element with the ID: 'paymentResults'
-	document.getElementById('paymentResults').appendChild(templateCopy)
+	
 }
 
 // display the payment details per month

@@ -118,9 +118,9 @@
 				<h2 class="border-bottom border-2 mt-md-3">Instruction</h2>
 				<p>Enter.... value</p>
 			</div>
-			<div class="row row-cols-1 row-cols-md-2">
+			<div class="row row-cols-1 row-cols-md-2 ">
 				<div class="col-md-4 mt-2">
-					<div class="card">
+					<div class="card h-100">
 						<div class="card-body container-fluid">
 							<h3 class="border-bottom pb-2 mb-3">
 								Royal Loan Planner
@@ -185,13 +185,45 @@
 				</div>
 				<div class="col-md-8 mt-2" id="paymentResults">
 					<!-- First result card goes here -->
-					
+					<div class="card container h-100">
+						<div class="card-body">
+							<h2 class="card-title text-center">
+								Your Monthly Payments
+							</h2>
+							<h3 class="card-subtitle mb-2 text-center pt-4 monthly-payment">
+								Monthly Payments
+							</h3>
+							<div class="card-text pt-4">
+								<div class="row row-cols-2">
+									<div class="col">
+										Total Principal 
+									</div>
+									<div class="col text-end principal">
+										$25,000.00 
+									</div>
+									<div class="col">
+										Total Interest 
+									</div>
+									<div class="col text-end interest">
+										$3,306.85 
+									</div>
+									<div class="col">
+										Total Cost 
+									</div>
+									<div class="col text-end cost">
+										$28,306,00 
+									</div>
+								</div>						 
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Form result -->
-			<h2 class="my-4 border-bottom border-2 pb-2">Results</h2>				
-				<table class="table-responsive container table-striped table-bordered">
-					<thead>
+			<h2 class="my-4 border-bottom border-2 pb-2">Results</h2>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead class="table-warning text-center">
 						<tr>
 							<th scope="col">Month</th>
 							<th scope="col">Payment</th>
@@ -201,10 +233,11 @@
 							<th scope="col">Balance</th>
 						</tr>
 					</thead>
-					<tbody id="tblResult"'>
+					<tbody id="tblResult" class="text-end">
 						<!-- Display result here -->
 					</tbody>
-			</table>
+				</table>
+			</div>				
 		</main>
 
 		<footer class="py-3 container-fluid">
@@ -262,38 +295,7 @@
 
 		<!-- Monthly Payments TEMPLATE -->
 		<template id="card-template">
-			<div class="card container">
-				<div class="card-body">
-					<h2 class="card-title text-center">
-						Your Monthly Payments
-					</h2>
-					<h3 class="card-subtitle mb-2 text-center pt-4 monthly-payment">
-						Monthly Payments
-					</h3>
-					<div class="card-text pt-4">
-						<div class="row row-cols-2">
-							<div class="col">
-								Total Principal 
-							</div>
-							<div class="col text-end principal">
-								$25,000.00 
-							</div>
-							<div class="col">
-								Total Interest 
-							</div>
-							<div class="col text-end interest">
-								$3,306.85 
-							</div>
-							<div class="col">
-								Total Cost 
-							</div>
-							<div class="col text-end cost">
-								$28,306,00 
-							</div>
-						</div>						 
-					</div>
-				</div>
-			</div>
+			
 		</template>
 		<!-- Table TEMPLATE -->
 		<template id="table-template">
