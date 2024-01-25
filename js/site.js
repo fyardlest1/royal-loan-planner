@@ -1,13 +1,13 @@
 function getValues() {
 	// get the values from the user
-	let amount = document.getElementById('loan').value;
-	let monthlyTerm = document.getElementById('term').value;
-	let interest = document.getElementById('interestRates').value;
+	let amount = document.getElementById('loan').value
+	let monthlyTerm = document.getElementById('term').value
+	let interest = document.getElementById('interestRates').value
 
 	// convert the values to integers
 	amount = parseInt(amount)
 	monthlyTerm = parseInt(monthlyTerm)
-	interest = parseInt(interest)	
+	interest = parseInt(interest)
 
 	let results = {
 		loan: amount,
@@ -18,23 +18,23 @@ function getValues() {
 	let totalPayment = {
 		payment: monthlyPayment(results),
 		interest: interestPayment(results),
-		principal: principalPayment(results)
+		principal: principalPayment(results),
 	}
 
 	// let payment = monthlyPayment(results)
 	// let rate = interestPayment(results)
-	displayCard(totalPayment)
 	let allPayment = totalMonthlyPayment(results, totalPayment)
 	displayTable(allPayment)
+	displayCard(totalPayment)
 }
 
-// total payment 
+// total payment
 // Formula: (amount loaned) * (rate / 1200) / ( 1 - (1 + rate/1200)^(-Number of Months) )
 // 25000 * (5 / 1200) / (1 - (1 + 5/1200)^(-60))
 
 // total interest
-function interestRates(rate) {	
-	let interest = (rate / 1200)
+function interestRates(rate) {
+	let interest = rate / 1200
 	return interest
 }
 
@@ -42,9 +42,7 @@ function interestRates(rate) {
 function monthlyPayment(results) {
 	let payment =
 		(results.loan * interestRates(results.interest)) /
-		((1 - (1 + interestRates(results.interest))** -results.term))
-
-	payment = Math.round(payment * 100) / 100
+		(1 - (1 + interestRates(results.interest)) ** -results.term)
 	return payment
 }
 
@@ -52,29 +50,20 @@ function monthlyPayment(results) {
 // Interest Payment = Previous Remaining Balance * rate/1200
 function interestPayment(results) {
 	let interest = results.loan * interestRates(results.interest)
-	interest = Math.round(interest * 100) / 100
+	interest = interest
 	return interest
 }
 
 // Principal Payment = Total Monthly Payment - Interest Payment
 function principalPayment(results) {
-	let totalMonthlyPayment = parseFloat(monthlyPayment(results));
-	let interest = parseFloat(interestPayment(results));
+	let totalMonthlyPayment = parseFloat(monthlyPayment(results))
+	let interest = parseFloat(interestPayment(results))
 
 	// calculate the principal
 	let principal = totalMonthlyPayment - interest
-	principal = Math.round(principal * 100) / 100
+	principal = principal
 	return principal
 }
-
-// At the end of each month, Remaining Balance = Previous Remaining Balance - Principal Payment
-// Calculate the Remaining Balance
-// function remainingBalance(results, totalPayment) {
-// 	// calculate the remaining balance
-// 	let newBalance = results.loan - totalPayment.principal
-// 	newBalance = Math.round(remainingBalance * 100) / 100
-// 	return newBalance
-// }
 
 // calculate result for each month
 function totalMonthlyPayment(results, totalPayment) {
@@ -86,6 +75,8 @@ function totalMonthlyPayment(results, totalPayment) {
 	let interest = totalPayment.interest
 	let balance = results.loan
 	let totalInterest = interest
+	let totalPrincipal = 0
+	let totalCost = 0
 
 	// iterate through the months and make calculation
 	for (let i = 0; i < results.term; i++) {
@@ -95,24 +86,32 @@ function totalMonthlyPayment(results, totalPayment) {
 		let resultsObject = {
 			month: i + 1,
 			payment: totalPayment.payment,
-			principal: Math.round(principal * 100) / 100,
-			interest: Math.round(interest * 100) / 100,
-			balance: Math.round(balance * 100) / 100,
-			totalInterest: Math.round(totalInterest * 100) / 100,
+			principal: principal,
+			interest: interest,
+			balance: balance,
+			totalInterest: totalInterest,
 		}
 
 		// calculating the principal and interest
 		interest = balance * interestRates(results.interest)
 		principal = payment - interest
 		totalInterest += interest
-		
+		totalPrincipal = +principal
+		totalCost = totalPrincipal + totalInterest
+
 		// update the loan for the next iteration
 		results.loan = balance
-
 
 		// add the new object in the array
 		resultsArray.push(resultsObject)
 	}
+
+	// adding the totalPrincipal, totalInterest, and totalCost into the array
+	resultsArray.push({
+		totalPrincipal: totalPrincipal,
+		totalInterest: totalInterest,
+		totalCost: totalCost,
+	})
 
 	return resultsArray
 }
@@ -139,13 +138,15 @@ function displayCard(totalPayment) {
 	templateCopy.querySelector(
 		'.interest'
 	).textContent = `$${totalPayment.interest}`
-	templateCopy.querySelector('.cost').textContent = `$${totalPayment.principal}`
+	templateCopy.querySelector(
+		'.cost'
+	).textContent = `$${totalPayment.principal}`
 
 	// add the copy of the template tag to the div element with the ID: 'paymentResults'
 	document.getElementById('paymentResults').appendChild(templateCopy)
 }
 
-
+// display the payment details per month
 function displayTable(results) {
 	// clean up the screen
 	document.getElementById('tblResult').innerHTML = ''
@@ -164,14 +165,17 @@ function displayTable(results) {
 		let templateCopy = template.content.cloneNode(true)
 
 		templateCopy.querySelector('.month').textContent = newItem.month
-		templateCopy.querySelector('.payment').textContent = newItem.payment
-		templateCopy.querySelector('.principal').textContent = newItem.principal
-		templateCopy.querySelector('.interest').textContent = newItem.interest
+		templateCopy.querySelector('.payment').textContent =
+			Math.round(newItem.payment * 100) / 100
+		templateCopy.querySelector('.principal').textContent =
+			Math.round(newItem.principal * 100) / 100
+		templateCopy.querySelector('.interest').textContent =
+			Math.round(newItem.interest * 100) / 100
 		templateCopy.querySelector('.totalInterest').textContent =
-			newItem.totalInterest
-		templateCopy.querySelector('.balance').textContent = newItem.balance
+			Math.round(newItem.totalInterest * 100) / 100
+		templateCopy.querySelector('.balance').textContent =
+			Math.round(newItem.balance * 100) / 100
 
 		tableData.appendChild(templateCopy)
 	}
 }
-
