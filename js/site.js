@@ -10,31 +10,18 @@ function getValues() {
 	interest = parseFloat(interest)
 
 	// chek if the numbers are valid numbers
-	if (isNaN(amount) || isNaN(term) || isNaN(interest)) {
+	if (isNaN(amount) || isNaN(monthlyTerm) || isNaN(interest)) {
 		Swal.fire({
 			icon: 'error',
 			title: 'Oops!',
 			text: '....',
 			backdrop: false,
 		})
-	} else if (fizzNumber > stopNumber || buzzNumber > stopNumber) {
-		// tell the user what to do
-		Swal.fire({
-			icon: 'error',
-			title: 'Almost there!',
-			text: '....',
-			backdrop: false,
-		})
 	} else {
-		let allPayment = totalMonthlyPayment(results, totalPayment)
-		displayTable(allPayment)
+		let allPayment = totalPayment(amount, interest, monthlyTerm)
 		displayCard(allPayment)
 	}	
 }
-
-// total payment
-// Formula: (amount loaned) * (rate / 1200) / ( 1 - (1 + rate/1200)^(-Number of Months) )
-// 25000 * (5 / 1200) / (1 - (1 + 5/1200)^(-60))
 
 // total interest
 function interestRates(rate) {
@@ -43,12 +30,26 @@ function interestRates(rate) {
 }
 
 // claculate the monthly payment
-function monthlyPayment(results) {
+function totalPayment(amount, rate, term) {
+	// the total monthly payment
 	let payment =
-		(results.loan * interestRates(results.interest)) /
-		(1 - (1 + interestRates(results.interest)) ** -results.term)
+		(amount * interestRates(rate)) /
+		(1 - (1 + interestRates(rate)) ** -term)
 
-	return payment
+	// the total cost
+	let totalCost = payment * term
+	// the total interest
+	let totalInterest = totalCost - amount
+
+	// create a new object with the value
+	let payments = {
+		amount: amount,
+		payment: payment,
+		interestRate: totalInterest,
+		cost: totalCost
+	}
+
+	return payments
 }
 
 // Principal Payment = Total Monthly Payment - Interest Payment
@@ -107,8 +108,23 @@ function totalMonthlyPayment(results, totalPayment) {
 }
 
 // displaying the card information
-function displayCard(totalPayment) {
-	
+function displayCard(payments) {
+	// format number to US dollar
+	let USDollar = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	})
+
+	let monthlyPayment = USDollar.format(payments.payment)
+	let amount = USDollar.format(payments.amount)
+	let interest = USDollar.format(payments.interestRate)
+	let totalCost = USDollar.format(payments.cost)
+
+	// add the value to the card
+	document.getElementById('monthly-payment').textContent = monthlyPayment
+	document.getElementById('principal').textContent = amount
+	document.getElementById('interest').textContent = interest
+	document.getElementById('cost').textContent = totalCost
 }
 
 // display the payment details per month
