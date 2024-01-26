@@ -133,13 +133,32 @@
 									Swal.fire({
 										icon: 'error',
 										title: 'Oops!',
-										text: '....',
+										text: 'Please enter valid numbers into the form.',
+										backdrop: false,
+									})
+								} else if (amount < 0 || term < 0 || interest < 0) {
+									Swal.fire({
+										icon: 'error',
+										title: 'Sorry!',
+										text: 'Please enter positiv valid numbers.',
+										backdrop: false,
+									})
+								} else if (interest > 30) {
+									Swal.fire({
+										icon: 'error',
+										title: 'Oh no!',
+										text: 'The interest is too big, you need a lawyer.',
 										backdrop: false,
 									})
 								} else {
 									let allPayment = totalPayment(amount, interest, term)
 									displayCard(allPayment)
-									let monthlyAmount = totalMonthlyPayment(amount, interest, term, allPayment.payment)
+									let monthlyAmount = totalMonthlyPayment(
+										amount,
+										interest,
+										term,
+										allPayment.payment
+									)
 									displayTable(monthlyAmount)
 								}	
 							}
@@ -276,11 +295,40 @@
 				<div class="col-12 col-lg-4">
 					<p>The code is structured in one fonction</p>
 					<h5>
-						<code>displayMessage()</code>
+						<code>getValues()</code>
 					</h5>
 					<p>
-						The <code>displayMessage</code> function gets the text
-						from the input and display it in a Sweet Alert popup.
+						The <code>getValues</code> function ....
+					</p>
+					<h5>
+						<code>interestRates()</code>
+					</h5>
+					<p>
+						The <code>interestRates</code> function ....
+					</p>
+					<h5>
+						<code>totalPayment()</code>
+					</h5>
+					<p>
+						The <code>totalPayment</code> function ....
+					</p>
+					<h5>
+						<code>totalMonthlyPayment()</code>
+					</h5>
+					<p>
+						The <code>totalMonthlyPayment</code> function ....
+					</p>
+					<h5>
+						<code>displayCard()</code>
+					</h5>
+					<p>
+						The <code>displayCard</code> function ....
+					</p>
+					<h5>
+						<code>displayTable()</code>
+					</h5>
+					<p>
+						The <code>displayTable</code> function ....
 					</p>
 					<h5>
 						That's kind of cool, right?

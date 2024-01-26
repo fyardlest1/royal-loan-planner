@@ -15,13 +15,32 @@ function getValues() {
 		Swal.fire({
 			icon: 'error',
 			title: 'Oops!',
-			text: '....',
+			text: 'Please enter valid numbers into the form.',
+			backdrop: false,
+		})
+	} else if (amount < 0 || term < 0 || interest < 0) {
+		Swal.fire({
+			icon: 'error',
+			title: 'Sorry!',
+			text: 'Please enter positiv valid numbers.',
+			backdrop: false,
+		})
+	} else if (interest > 30) {
+		Swal.fire({
+			icon: 'error',
+			title: 'Oh no!',
+			text: 'The interest is too big, you need a lawyer.',
 			backdrop: false,
 		})
 	} else {
 		let allPayment = totalPayment(amount, interest, term)
 		displayCard(allPayment)
-		let monthlyAmount = totalMonthlyPayment(amount, interest, term, allPayment.payment)
+		let monthlyAmount = totalMonthlyPayment(
+			amount,
+			interest,
+			term,
+			allPayment.payment
+		)
 		displayTable(monthlyAmount)
 	}	
 }
