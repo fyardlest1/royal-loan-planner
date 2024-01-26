@@ -1,16 +1,17 @@
+// Get the values from the user
 function getValues() {
 	// get the values from the user
 	let amount = document.getElementById('loan').value
-	let monthlyTerm = document.getElementById('term').value
+	let term = document.getElementById('term').value
 	let interest = document.getElementById('interestRates').value
 
 	// convert the values to integers
 	amount = parseFloat(amount)
-	monthlyTerm = parseInt(monthlyTerm)
+	term = parseInt(term)
 	interest = parseFloat(interest)
 
 	// chek if the numbers are valid numbers
-	if (isNaN(amount) || isNaN(monthlyTerm) || isNaN(interest)) {
+	if (isNaN(amount) || isNaN(term) || isNaN(interest)) {
 		Swal.fire({
 			icon: 'error',
 			title: 'Oops!',
@@ -18,12 +19,14 @@ function getValues() {
 			backdrop: false,
 		})
 	} else {
-		let allPayment = totalPayment(amount, interest, monthlyTerm)
+		let allPayment = totalPayment(amount, interest, term)
 		displayCard(allPayment)
+		let monthlyAmount = totalMonthlyPayment(amount, interest, term, allPayment.payment)
+		displayTable(monthlyAmount)
 	}	
 }
 
-// total interest
+// interest rate
 function interestRates(rate) {
 	let interest = rate / 1200
 	return interest
@@ -49,59 +52,41 @@ function totalPayment(amount, rate, term) {
 		cost: totalCost
 	}
 
+	// returning the object
 	return payments
 }
 
-// Principal Payment = Total Monthly Payment - Interest Payment
-function principalPayment(results) {
-	let totalMonthlyPayment = parseFloat(monthlyPayment(results))
-	let interest = parseFloat(interestPayment(results))
-
-	// calculate the principal
-	let principal = totalMonthlyPayment - interest
-	principal = principal
-	return principal
-}
-
 // calculate result for each month
-function totalMonthlyPayment(results, totalPayment) {
+function totalMonthlyPayment(amount, rate, term, monthlyPayment) {
 	// creating an empty array to hold the objects
-	let resultsArray = []
-
-	let payment = totalPayment.payment
-	let principal = totalPayment.principal
-	let interest = totalPayment.interest
-	let balance = results.loan
-	let totalInterest = interest
-	let totalPrincipal = 0
-	let totalCost = 0
+	let resultsArray = [] 
+	// the remaining balance
+	let remainingBalance = amount
+	let totalInterest = 0
 
 	// iterate through the months and make calculation
-	for (let i = 0; i < results.term; i++) {
-		// the remaining balance
-		balance = results.loan - principal
-		// creating a new object for each iteration
-		let resultsObject = {
-			month: i + 1,
-			payment: totalPayment.payment,
-			principal: principal,
-			interest: interest,
-			balance: balance,
-			totalInterest: totalInterest,
-		}
-
-		// calculating the principal and interest
-		interest = balance * interestRates(results.interest)
-		principal = payment - interest
+	for (let month = 1; month <= term; month++) {
+		// interest to pay
+		let interest = remainingBalance * interestRates(rate)
+		let amountPayment = monthlyPayment - interest
 		totalInterest += interest
-		totalPrincipal = +principal
-		totalCost = totalPrincipal + totalInterest
+		// update the balance for the next iteration
+		remainingBalance -= amountPayment
+		// allways return a positiv number of the remaining balance
+		// using the absolute amount
+		remainingBalance = Math.abs(remainingBalance)
 
-		// update the loan for the next iteration
-		results.loan = balance
-
+		// create a new object with the data
+		let paymentObj = {
+			month,
+			monthlyPayment,
+			interest,
+			amountPayment,
+			totalInterest,
+			remainingBalance,
+		}
 		// add the new object in the array
-		resultsArray.push(resultsObject)
+		resultsArray.push(paymentObj)
 	}
 
 	return resultsArray
@@ -129,34 +114,65 @@ function displayCard(payments) {
 
 // display the payment details per month
 function displayTable(results) {
+	// format number to US dollar
+	let USDollar = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	})
+
 	// clean up the screen
 	document.getElementById('tblResult').innerHTML = ''
 	// get a copy of the template
-	let template
-	// select the table-template
-	template = document.getElementById('table-template')
+	let template = document.getElementById('table-template')
 
 	// getting the div id "tblResult"
 	let tableData = document.getElementById('tblResult')
 
-	for (let i = 0; i < results.length - 1; i++) {
-		let newItem = results[i]
-
-		// get a new copy of the template's contents
+	// the arrow function that return the template
+	results.forEach((newItem) => {
 		let templateCopy = template.content.cloneNode(true)
 
 		templateCopy.querySelector('.month').textContent = newItem.month
-		templateCopy.querySelector('.payment').textContent =
-			Math.round(newItem.payment * 100) / 100
-		templateCopy.querySelector('.principal').textContent =
-			Math.round(newItem.principal * 100) / 100
-		templateCopy.querySelector('.interest').textContent =
-			Math.round(newItem.interest * 100) / 100
+		templateCopy.querySelector('.payment').textContent = USDollar.format(
+			newItem.monthlyPayment
+		)
+		templateCopy.querySelector('.principal').textContent = USDollar.format(
+			newItem.amountPayment
+		)
+		templateCopy.querySelector('.interest').textContent = USDollar.format(
+			newItem.interest
+		)
 		templateCopy.querySelector('.totalInterest').textContent =
-			Math.round(newItem.totalInterest * 100) / 100
-		templateCopy.querySelector('.balance').textContent =
-			Math.round(newItem.balance * 100) / 100
+			USDollar.format(newItem.totalInterest)
+		templateCopy.querySelector('.balance').textContent = USDollar.format(
+			newItem.remainingBalance
+		)
 
 		tableData.appendChild(templateCopy)
-	}
+	})
+
+	// the equivalent with a for loop
+	// for (let i = 0; i < results.length; i++) {
+	// 	let newItem = results[i]
+
+	// 	// get a new copy of the template's contents
+	// 	let templateCopy = template.content.cloneNode(true)
+
+	// 	templateCopy.querySelector('.month').textContent = newItem.month
+	// 	templateCopy.querySelector('.payment').textContent = USDollar.format(
+	// 		newItem.monthlyPayment
+	// 	)
+	// 	templateCopy.querySelector('.principal').textContent = USDollar.format(
+	// 		newItem.amountPayment
+	// 	)
+	// 	templateCopy.querySelector('.interest').textContent = USDollar.format(
+	// 		newItem.interest
+	// 	)
+	// 	templateCopy.querySelector('.totalInterest').textContent =
+	// 		USDollar.format(newItem.totalInterest)
+	// 	templateCopy.querySelector('.balance').textContent = USDollar.format(
+	// 		newItem.remainingBalance
+	// 	)
+	// 	tableData.appendChild(templateCopy)
+	// }
 }
