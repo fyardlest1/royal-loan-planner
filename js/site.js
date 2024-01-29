@@ -133,7 +133,7 @@ function displayCard(payments) {
 
 // display the payment details per month
 function displayTable(results) {
-	// format number to US dollar
+	// format number to US dollar currency
 	let USDollar = new Intl.NumberFormat('en-US', {
 		style: 'currency',
 		currency: 'USD',

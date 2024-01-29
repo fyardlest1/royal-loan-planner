@@ -86,9 +86,12 @@
 							</li>
 							<li class="nav-item">
 								<!-- CHANGE ME!!!!!!!! -->
-								<a class="nav-link" 
-                                    href="https://github.com/fyardlest1/royal-loan-planner"
-                                    target="_blank">The Repo</a>
+								<a
+									class="nav-link"
+									href="https://github.com/fyardlest1/royal-loan-planner"
+									target="_blank"
+									>The Repo</a
+								>
 							</li>
 							<li class="nav-item">
 								<a
@@ -293,43 +296,78 @@
 				</div>
 				<!-- Code explanation -->
 				<div class="col-12 col-lg-4">
-					<p>The code is structured in one fonction</p>
+					<h4>Time to desistify the code!</h4>
+					<p>
+						Before starting to code it is always essential to
+						understand the problem that we have to solve, and for
+						this challenge I had this small list of tasks to
+						accomplish:
+					</p>
+					<ul>
+						<li>Get the values from the user.</li>
+						<li>Calculate the interest rate base on it's value.</li>
+						<li>Calculate the montly payment and store the value inside and object.</li>
+						<li>Calculate the total monthly payment.</li>
+						<li>Display the result of the total payment in a card.</li>
+						<li>Display the detail of the result in a table for each month.</li>
+					</ul>
 					<h5>
 						<code>getValues()</code>
 					</h5>
 					<p>
-						The <code>getValues</code> function ....
+						The <code>getValues</code> function takes care of
+						retrieving the values provided by the user of our
+						application, knowing that the values retrieved will be
+						of type string we must convert them into numeric values.
+						And finally we use the SweetAlert2 helper to validate
+						the data and finally call the
+						<code>totalPayment</code> function to pass the values
+						recovered after their conversion and the
+						<code>displayCard</code> function to display the result
+						into the montly payment card. Use the 
+						<code>totalMonthlyPayment</code> function which contains 
+						an array of objects with all the monthly details. 
+						And finally using a <code>displayTable</code> function 
+						to display the monthly result in a table.
 					</p>
 					<h5>
 						<code>interestRates()</code>
 					</h5>
 					<p>
-						The <code>interestRates</code> function ....
+						I could still working without the
+						<code>interestRates</code> function, and instead use the
+						following formula: <code>(rate / 1200)</code>, but as I
+						don't really like using hard coded values, so I created
+						this little function in order to use it in place of this
+						formula. At the end, all this function does is returning
+						the interest in question, whatever its value.
 					</p>
 					<h5>
 						<code>totalPayment()</code>
 					</h5>
 					<p>
-						The <code>totalPayment</code> function ....
+						The <code>totalPayment</code> function receives three parameters: 
+						the <b>loan</b> amount (the <code>principal</code>), 
+						the <b>interest</b> percentage, and the <b>total months</b> 
+						(the <code>term</code>) it will take to repay the debt. 
+						The following formula will allow us to calculate the monthly payment, 
+						I didn't invent it, it's finance: <br />
+						<strong><em>(amount loaned) * (rate / 1200) / (1 - (1 + rate/1200) ^(-Number of Months))</em></strong>.
+						<br /> So to continue, I calculate the total cost, and the total interest. 
+						Then store all that in an object and then return the object for later use. As simple as that!
 					</p>
 					<h5>
 						<code>totalMonthlyPayment()</code>
 					</h5>
-					<p>
-						The <code>totalMonthlyPayment</code> function ....
-					</p>
+					<p>The <code>totalMonthlyPayment</code> function ....</p>
 					<h5>
 						<code>displayCard()</code>
 					</h5>
-					<p>
-						The <code>displayCard</code> function ....
-					</p>
+					<p>The <code>displayCard</code> function ....</p>
 					<h5>
 						<code>displayTable()</code>
 					</h5>
-					<p>
-						The <code>displayTable</code> function ....
-					</p>
+					<p>The <code>displayTable</code> function ....</p>
 					<h5>
 						That's kind of cool, right?
 						<span class="fs-4">&#128526;</span>
