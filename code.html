@@ -306,10 +306,18 @@
 					<ul>
 						<li>Get the values from the user.</li>
 						<li>Calculate the interest rate base on it's value.</li>
-						<li>Calculate the montly payment and store the value inside and object.</li>
+						<li>
+							Calculate the montly payment and store the value
+							inside and object.
+						</li>
 						<li>Calculate the total monthly payment.</li>
-						<li>Display the result of the total payment in a card.</li>
-						<li>Display the detail of the result in a table for each month.</li>
+						<li>
+							Display the result of the total payment in a card.
+						</li>
+						<li>
+							Display the detail of the result in a table for each
+							month.
+						</li>
 					</ul>
 					<h5>
 						<code>getValues()</code>
@@ -324,11 +332,11 @@
 						<code>totalPayment</code> function to pass the values
 						recovered after their conversion and the
 						<code>displayCard</code> function to display the result
-						into the montly payment card. Use the 
-						<code>totalMonthlyPayment</code> function which contains 
-						an array of objects with all the monthly details. 
-						And finally using a <code>displayTable</code> function 
-						to display the monthly result in a table.
+						into the montly payment card. Use the
+						<code>totalMonthlyPayment</code> function which contains
+						an array of objects with all the monthly details. And
+						finally using a <code>displayTable</code> function to
+						display the monthly result in a table.
 					</p>
 					<h5>
 						<code>interestRates()</code>
@@ -346,28 +354,132 @@
 						<code>totalPayment()</code>
 					</h5>
 					<p>
-						The <code>totalPayment</code> function receives three parameters: 
-						the <b>loan</b> amount (the <code>principal</code>), 
-						the <b>interest</b> percentage, and the <b>total months</b> 
-						(the <code>term</code>) it will take to repay the debt. 
-						The following formula will allow us to calculate the monthly payment, 
-						I didn't invent it, it's finance: <br />
-						<strong><em>(amount loaned) * (rate / 1200) / (1 - (1 + rate/1200) ^(-Number of Months))</em></strong>.
-						<br /> So to continue, I calculate the total cost, and the total interest. 
-						Then store all that in an object and then return the object for later use. As simple as that!
+						The <code>totalPayment</code> function receives three
+						parameters: the <b>loan</b> amount (the
+						<code>principal</code>), the <b>interest</b> percentage,
+						and the <b>total months</b> (the <code>term</code>) it
+						will take to repay the debt. The following formula will
+						allow us to calculate the monthly payment, I didn't
+						invent it, it's finance: <br />
+						<strong
+							><em
+								>(amount loaned) * (rate / 1200) / (1 - (1 +
+								rate/1200) ^(-Number of Months))</em
+							></strong
+						>. <br />
+						So to continue, I calculate the total cost, and the
+						total interest. Then store all that in an object and
+						then return the object for later use. As simple as that!
 					</p>
 					<h5>
 						<code>totalMonthlyPayment()</code>
 					</h5>
-					<p>The <code>totalMonthlyPayment</code> function ....</p>
+					<p>
+						The <code>totalMonthlyPayment</code> function supports
+						creating monthly data and returning it. For this you
+						will need parameters to pass when calling the function,
+						and in our case we need the amount borrowed (the
+						principal), the interest rate, the duration of the loan,
+						and the amount to be paid monthly. So we start by
+						creating an empty array, and we know that before the
+						first month of payment the remaining balance is the
+						principal, and the interest rate is equal to 0.
+					</p>
+					<p>
+						The for loop iterates over each month from
+						<b>month 1</b> to the value of the variable
+						<code>term</code>. Inside the loop, we calculates the
+						interest to be paid for the current month using the
+						formula:
+						<code
+							>interest = remainingBalance *
+							interestRates(rate)</code
+						>.
+						<em
+							>See the <b>interestRates</b> function that we've
+							create above to returns the interest rate.</em
+						>
+						Next, we calculate the amount to be paid for the current
+						month by subtracting the interest from the monthly
+						payment:
+						<code>amountPayment = monthlyPayment - interest</code>.
+						After that we update the total of interest, and update
+						the remaining balance for the next iteration by
+						subtracting the amount paid from the remaining balance:
+						<code>remainingBalance -= amountPayment</code>, than we
+						ensure that the remaining balance is always positive by
+						taking the absolute value using
+						<code>Math.abs(remainingBalance)</code>.
+					</p>
+					<p>
+						Now we need to capture all those data, and on of the
+						best way to do this is by creating a new object to store
+						them all. That's why we create the new object
+						<code>paymentObj</code> that holds the details for the
+						data we need to store such as, the month number, monthly
+						payment, interest, amount payment (principal), total
+						interest, and remaining balance. Right after that we
+						just need to add each newly created payment object
+						inside an array called <code>resultsArray</code>. After
+						executing our for loop all we have to do is returning
+						our collection, or our array of objects.
+					</p>
 					<h5>
 						<code>displayCard()</code>
 					</h5>
-					<p>The <code>displayCard</code> function ....</p>
+					<p>
+						The <code>displayCard</code> function is meant to take
+						payment information, format it as US dollars, and update
+						specific HTML elements on a webpage with the formatted
+						values. <b>Formatting Numbers as USD:</b> The function
+						uses the <code>Intl.NumberFormat</code> constructor to
+						create a formatter for US dollars. It sets the style to
+						'currency' and the currency to 'USD'. This formatter
+						(<b>USDollar</b>) is then used to format various numeric
+						values such as the <code>amount</code>,
+						<code>interestRate</code>, and
+						<code>cost</code> properties of the payments. Then we
+						accesses specific HTML elements using
+						<code>document.getElementById</code>
+						and updates their content with the formatted values.
+					</p>
 					<h5>
 						<code>displayTable()</code>
 					</h5>
-					<p>The <code>displayTable</code> function ....</p>
+					<p>
+						The <code>displayTable</code> function takes an array of
+						results, formats numeric values as US dollars, creates a
+						table row for each result based on a template, populates
+						the table row with data, and appends it to a table on
+						the web page.
+					</p>
+					<p>
+						Similar to the previous function, we create a formatter
+						for US dollars using the
+						<code>Intl.NumberFormat</code> constructor. Than we
+						clear the content of the HTML element with the ID
+						'<code>tblResult</code>' to ensure that the table starts
+						with a clean slate before adding new data when we click
+						the button. Next, we access the template for the table
+						from an HTML element with the ID
+						'<code>table-template</code>'. This template is a
+						non-displayed template in the HTML document (Read more
+						about <b>template tag</b> in my project:
+						<a
+							href="https://steponnopets.fyardlest.net/code"
+							class="text-decoration-none"
+							target="_blank"
+							><em>Step-On-No-Pets</em></a
+						>). Now it's time to create a new template or clone the
+						template, so inside the loop we create a deep copy of
+						the template including it's content. After that we need
+						to populates various elements within the cloned template
+						with data from the current newItem in the loop. At the
+						end, all we have to do is to append the template to the
+						table, so the cloned and populated template is appended
+						to the HTML element that contains the ID
+						'<code>tblResult</code>'.
+					</p>
 					<h5>
 						That's kind of cool, right?
 						<span class="fs-4">&#128526;</span>
@@ -444,7 +556,7 @@
 				'remove-indent': true,
 				'left-trim': true,
 				'right-trim': true,
-			})
+			});
 		</script>
 	</body>
 </html>
