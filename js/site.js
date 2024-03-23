@@ -22,9 +22,9 @@ function getValues() {
 		Swal.fire({
 			icon: 'error',
 			title: 'Sorry!',
-			text: 'Please enter positiv valid numbers.',
+			text: 'Please enter positive valid numbers.',
 			backdrop: false,
-		})
+		});
 	} else if (interest > 30) {
 		Swal.fire({
 			icon: 'error',
